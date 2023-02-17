@@ -1,4 +1,3 @@
-/* eslint-disable */
 module.exports = {
   env: {
     browser: true,
@@ -18,8 +17,7 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
-    'prettier/prettier': 'error',
-    'no-console': 'error',
-    'no-debugger': 'error'
+    '@typescript-eslint/no-explicit-any': 'off',
+    'react/react-in-jsx-scope': 'off'
   }
 };
