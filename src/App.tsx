@@ -1,8 +1,8 @@
 import './App.css';
-import FormSubmit from './pages/formSubmit';
+import Person from './pages/Person';
 
 function App() {
-  return <FormSubmit />;
+  return <Person />;
 }
 
 export default App;
