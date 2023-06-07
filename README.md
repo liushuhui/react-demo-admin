@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+该前端页面主要用于展示nest返回的数据，后台采用的nest，数据库使用的mysql，功能主要包含，增删改查，导入导出，链表查询，附件上传等，后台代码仓库为https://github.com/liushuhui/nest-demo.
 
 ## Available Scripts
 
