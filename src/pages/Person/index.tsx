@@ -1,4 +1,4 @@
-import { Button, Image, Modal, Space, Upload, UploadProps, message } from 'antd';
+import { Button, Image, Modal, Space, Tag, Upload, UploadProps, message } from 'antd';
 import { deleteByIdApi, getAll, getCodeApi, tableExport } from '../../api';
 import { useRef, useState } from 'react';
 import { ActionType, ProTable } from '@ant-design/pro-components';
@@ -6,6 +6,7 @@ import { UploadChangeParam, UploadFile } from 'antd/es/upload';
 import AddForm from '../components/AddForm';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useMount } from 'ahooks';
+import TagModal from '../components/TagModal';
 
 
 const FormSubmit = () => {
@@ -25,8 +26,8 @@ const FormSubmit = () => {
     const req = { ...params, ...sortParams }
     const result: any = await getAll(req);
     return {
-      data: result.data.data,
-      total: result.data.count,
+      data: result.data.data.list,
+      total: result.data.data.count,
       success: true,
     };
   };
@@ -60,6 +61,19 @@ const FormSubmit = () => {
       align: 'center'
     },
     {
+      title: '标签',
+      dataIndex: 'tags',
+      key: 'tags',
+      align: 'center',
+      render: (_: any, record: any) => (
+        <Space>
+          {
+            record.tags.map((item: any) => <Tag key={item.id} color='orange'>{item.tag}</Tag>)
+          }
+        </Space>
+      )
+    },
+    {
       title: '更新时间',
       dataIndex: 'date',
       key: 'date',
@@ -86,6 +100,7 @@ const FormSubmit = () => {
               codeFn={getCode}
             />
             <Button type='link' danger onClick={() => deleteData(record.id)}>删除</Button>
+            <TagModal id={record.id} refresh={() => actionRef?.current?.reload()}/>
           </Space>
         )
       }
@@ -107,6 +122,7 @@ const FormSubmit = () => {
       document.body.removeChild(elem);
     }
   }
+
   const deleteData = (id: number) => {
     Modal.confirm({
       title: '提示',

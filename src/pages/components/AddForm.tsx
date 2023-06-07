@@ -20,7 +20,7 @@ const AddForm: FC<AddFormPropsType> = (props: any) => {
   } = props;
 
   const { run } = useRequest(async (id, values) => {
-    values.imgs = values.imgs[0].url ? values.imgs[0].url : values.imgs[0].response.data;
+    values.imgs = values?.imgs?.[0]?.url ? values?.imgs[0]?.url : values?.imgs?.[0]?.response?.data;
     return buttonTitle === '新增' ? addData(values) : updateByIdApi(id, values)
   }, {
     manual: true,
@@ -58,7 +58,7 @@ const AddForm: FC<AddFormPropsType> = (props: any) => {
           },
         }}
         // accept='.png, .jepg, .jpg'
-        action="/api/user/upload"
+        action="/api/imgs/upload"
         label="头像"
         name="imgs"
         listType="picture-card"

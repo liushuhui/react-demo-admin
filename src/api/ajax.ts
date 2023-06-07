@@ -14,9 +14,10 @@ const ajax = (url: string, data = {}, method = "GET", config = {}) => {
       })
       .catch((error) => {
         const { response } = error;
+        console.log('error', error);
         response.data
-          ? message.error(`请求出错了：${response.data.msg}`)
-          : message.error(`请求出错了：${error.message}`);
+          ? message.error(`${response.data.msg}`)
+          : message.error(`${error.message}`);
       });
   });
 };
